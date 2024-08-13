@@ -1,0 +1,73 @@
+---
+title: "EDS 212 | Day 2 - Tasks | Part 2"
+author: "Nicole Pepper"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+  warning: FALSE
+  message: FALSE
+  echo: FALSE
+---
+
+Wild Data
+
+```{r}
+# Load Libraries
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+# Load in data
+mack_verts <- read_csv(here::here("data", "AS00601.csv"))
+mack_verts
+
+# Clean names
+mack_verts <- mack_verts %>% clean_names() 
+
+```
+
+```{r}
+# Mess around with the data
+mc_wt_5 <- mack_verts$weight[5]
+mc_wt_5
+
+mc_length_8_20 <- mack_verts$length1[(8:20)]
+mc_length_8_20
+
+mc_dates <- mack_verts$sampledate
+mc_dates
+```
+
+## Create a salamander plot from subset
+```{r}
+
+# Subset the data set
+mc_salamanders <- subset(mack_verts, species=="DITE")
+mc_salamanders
+
+# Plot the salamanders
+ggplot(data=mc_salamanders, aes(x = length1, y = weight)) +
+  geom_point(aes(size = 2.5, alpha = .50, color = "orange")) +
+  labs(title= "Giant Pacific Salamander Snout Length vs Weight", x = "Snought-Vent Length (millimeters)", y = "Weight (grams)") + theme(legend.position="none")
+
+```
+
+## Create a cutthroat plot from subset
+```{r}
+
+# Subset the data set
+mc_trout <- subset(mack_verts, species=="ONCL")
+mc_trout
+
+# Plot the salamanders
+ggplot(data=mc_trout, aes(x = length1, y = weight)) +
+  geom_point(aes(size = 2.5, alpha = .50, color = reach)) +
+scale_color_manual(values=c("yellow", "green", "#56B4E9"))+ 
+  labs(title= "Cutthroat Trout Length by Weight", x = "Cutthroat Trout Length (millimeters)", y = "Weight (grams)") + theme(legend.position="none") +
+  theme(text = element_text(family = "Optima-Bold"))
+
+ggsave(here::here( "figs","Trout_Fig.jpg"), height = 6, width = 7)
+```

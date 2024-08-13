@@ -1,0 +1,67 @@
+---
+title: "EDS221 Day2 Task"
+author: "Nicole Pepper"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data Types, Indexing Data, Import & Plot Data
+
+## Part 1
+```{r}
+# Load Libraries
+library(tidyverse)
+
+# Create a vector
+vec_1 <- c(2, 5, 9, 10, 8, 1, 0)
+vec_1
+
+# Inspect the vector
+class(vec_1)
+typeof(vec_1)
+
+# Story vector values as variable
+vec_1_e3 <- vec_1[3]
+vec_1_e3
+
+vec_1_e1 <- vec_1[1]
+vec_1_e1
+
+vec_1_e5to7 <- vec_1[(5:7)]
+vec_1_e5to7
+
+vec_1 <- as.character(vec_1)
+vec_1
+```
+## Part 2
+```{r}
+# Create another vector made of characters
+vec_2 <- c(town = "Santa Barbara", location = "Rincon", swell = "south")
+
+vec_2
+
+# Inspect the vector
+class(vec_2)
+typeof(vec_2)
+length(vec_2)
+vec_2[2]
+
+```
+
+## Part 3
+```{r}
+df_1 <- data.frame(region = c("A", "B", "A", "D"), 
+                   species = c("otter", "great white", "sea lion", "gray whale"),
+                    count = c(12, 2, 36, 6))
+
+df_1
+
+class(df_1)
+class(df_1$species)
+
+max(df_1$count)
+
+```
+
