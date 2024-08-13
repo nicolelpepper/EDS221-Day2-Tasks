@@ -17,6 +17,8 @@ Wild Data
 library(tidyverse)
 library(here)
 library(janitor)
+library(extrafont)
+
 ```
 
 ```{r}
@@ -62,12 +64,13 @@ ggplot(data=mc_salamanders, aes(x = length1, y = weight)) +
 mc_trout <- subset(mack_verts, species=="ONCL")
 mc_trout
 
-# Plot the salamanders
+# Plot the salamanders with some complicated settings
 ggplot(data=mc_trout, aes(x = length1, y = weight)) +
-  geom_point(aes(size = 2.5, alpha = .50, color = reach)) +
-scale_color_manual(values=c("yellow", "green", "#56B4E9"))+ 
-  labs(title= "Cutthroat Trout Length by Weight", x = "Cutthroat Trout Length (millimeters)", y = "Weight (grams)") + theme(legend.position="none") +
-  theme(text = element_text(family = "Optima-Bold"))
+  geom_point(aes(color = reach), size = 1.8, alpha = .50) +
+scale_color_manual('Reach',values=c("#FA8072", "#0e7965", "#34c2c9"), labels=c("Lower","Middle","Upper"))+ 
+  labs(title= "Cutthroat Trout Length by Weight in Mack Creek, NY", x = "Cutthroat Trout Length (millimeters)", y = "Weight (grams)")+
+  theme(legend.position="right")+
+  theme(text = element_text(family = 'Optima-Bold'),axis.title = element_text(family = 'Optima'), legend.text = element_text(size = 10))
 
-ggsave(here::here( "figs","Trout_Fig.jpg"), height = 6, width = 7)
+ggsave(here::here( "figs","Trout_Fig.jpg"), height = 4, width = 7)
 ```
